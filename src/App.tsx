@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import CarRegistration from 'views/CarRegistration';
 import './App.css';
 
 function App() {
-  const [stateTest, setStateTest] = useState(0);
-  useEffect(() => {
-    console.log('Rendered');
-  }, []);
-
-  useEffect(() => {
-    if (stateTest === 10) setStateTest(0);
-    console.log('Executed due to depency update');
-  }, [stateTest]);
-
-  function incrementInteger() {
-    setStateTest((prev) => {
-      return prev + 1;
-    });
-  }
-
   return (
     <div
-      onClick={() => {
-        incrementInteger();
+      style={{
+        height: '100vh',
+        width: '100vw',
+        display: 'flex',
+        justifyContent: 'center',
       }}
     >
-      Incrementar valor: {stateTest}
+      <CarRegistration hasName={false} />
     </div>
   );
 }
