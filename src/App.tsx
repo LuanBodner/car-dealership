@@ -1,20 +1,17 @@
-import React from 'react';
-import CarRegistration from 'views/CarRegistration';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { CarList } from 'views/CarList'
+import './App.css'
 
 function App() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        width: '100vw',
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
-      <CarRegistration hasName={false} />
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route path='/' component={CarList} />
+        <Redirect to='/' />
+      </Switch>
+    </Router>
+  )
 }
 
-export default App;
+export default App
