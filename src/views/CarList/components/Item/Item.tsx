@@ -8,7 +8,6 @@ export function Item(props: ItemProps) {
     <div style={{ marginBottom: '15px', border: '1px solid grey', width: '42vw', height: '20vh', display: 'flex', justifyContent: 'space-evenly' }}>
       <Icon image={props.image} />
       <Data brand={props.brand} color={props.color} name={props.name} />
-      {props.children}
     </div>
   )
 }

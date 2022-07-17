@@ -35,8 +35,8 @@ declare module '*.jpeg' {
 }
 
 declare module '*.png' {
-  const src: string
-  export default src
+  const value: any
+  export = value
 }
 
 declare module '*.webp' {

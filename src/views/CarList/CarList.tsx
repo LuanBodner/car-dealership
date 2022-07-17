@@ -55,11 +55,7 @@ export function CarList() {
         </div>
         <div style={{ height: '800px', overflowY: 'scroll' }}>
           {mockObject.map((element) => {
-            return (
-              <Item brand={element.brand} id={element.id} color={element.color} image={element.image} name={element.name}>
-                <div>Texto filho</div>
-              </Item>
-            )
+            return <Item brand={element.brand} id={element.id} color={element.color} image={element.image} name={element.name} />
           })}
         </div>
       </div>

@@ -9,7 +9,7 @@
     "sourceMap": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "module": "ES6",
+    "module": "CommonJS",
     "target": "es5",
     "jsx": "react",
     "lib": ["es5", "es6", "dom"]
