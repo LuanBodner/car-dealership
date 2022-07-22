@@ -5,38 +5,13 @@ import { Item } from './components/Item/Item'
 const mockObject = [
   {
     id: 1,
-    name: 'Uno',
-    brand: 'Fiat',
-    color: 'Preto',
-    image: 'C:\\Users\\luanr\\Documents\\car-dealership\\src\\images\\pulse.png',
-  },
-  {
-    id: 2,
-    name: 'Uno',
-    brand: 'Fiat',
-    color: 'Branco',
-    image: 'C:\\Users\\luanr\\Documents\\car-dealership\\src\\images\\pulse.png',
-  },
-  {
-    id: 3,
-    name: 'Uno',
-    brand: 'Fiat',
-    color: 'Vermelho',
-    image: 'C:\\Users\\luanr\\Documents\\car-dealership\\src\\images\\pulse.png',
-  },
-  {
-    id: 4,
-    name: 'Uno',
-    brand: 'Fiat',
-    color: 'Preto',
-    image: 'C:\\Users\\luanr\\Documents\\car-dealership\\src\\images\\pulse.png',
-  },
-  {
-    id: 5,
-    name: 'Uno',
-    brand: 'Fiat',
-    color: 'Preto',
-    image: 'C:\\Users\\luanr\\Documents\\car-dealership\\src\\images\\pulse.png',
+    marcaid: 1,
+    modelo: 'Modelo',
+    ano: 1995,
+    foto: 'http://localhost:8081/suv.png',
+    placa: 1234567,
+    cor: 'preto',
+    valordiaria: 50.0,
   },
 ]
 
@@ -55,11 +30,7 @@ export function CarList() {
         </div>
         <div style={{ height: '800px', overflowY: 'scroll' }}>
           {mockObject.map((element) => {
-            return (
-              <Item brand={element.brand} id={element.id} color={element.color} image={element.image} name={element.name}>
-                <div>Texto filho</div>
-              </Item>
-            )
+            return <Item brand={element.modelo} id={element.id} color={element.cor} image={element.foto} name={String(element.ano)} />
           })}
         </div>
       </div>

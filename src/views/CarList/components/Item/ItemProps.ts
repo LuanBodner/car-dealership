@@ -6,7 +6,7 @@ export interface ItemProps {
   brand: string
   color: string
   image: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export interface DataProps {
