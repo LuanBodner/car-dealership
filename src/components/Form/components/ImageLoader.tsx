@@ -6,7 +6,7 @@ import placeholderImage from '../../../images/placeholder.png'
 export function ImageLoader(props: ImageLoaderProps) {
   const fileAnchor: any = useRef()
   const [image, setImage] = useState()
-  const [renderedImage, setRenderedImage] = useState<any>()
+  const [renderedImage, setRenderedImage] = useState<any>(props.image)
 
   useEffect(() => {
     if (image) {

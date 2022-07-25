@@ -1,24 +1,28 @@
 import { Button } from '@mui/material'
-import React from 'react'
+import CarDTO from 'data/dtos/CarDTO'
+import { NodeAPI } from 'data/services/Service'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import { Item } from './components/Item/Item'
 
-const mockObject = [
-  {
-    id: 1,
-    marcaid: 1,
-    modelo: 'Modelo',
-    ano: 1995,
-    foto: 'http://localhost:8081/suv.png',
-    placa: 1234567,
-    cor: 'preto',
-    valordiaria: 50.0,
-  },
-]
-
 export function CarList() {
+  const [cars, setCars] = useState<Array<CarDTO>>()
   function goToCreatePage() {
     window.location.href = '/create-car'
   }
+
+  async function getListOfCars() {
+    try {
+      const response = await NodeAPI.get(`${process.env.REACT_APP_BASE_URL}/veiculo`)
+      setCars(response.data)
+    } catch (error) {
+      toast.error('Erro na busca de veículos')
+    }
+  }
+
+  useEffect(() => {
+    getListOfCars()
+  }, [])
 
   return (
     <div style={{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center' }}>
@@ -29,7 +33,7 @@ export function CarList() {
           </Button>
         </div>
         <div style={{ height: '800px', overflowY: 'scroll' }}>
-          {mockObject.map((element) => {
+          {cars?.map((element) => {
             return <Item brand={element.modelo} id={element.id} color={element.cor} image={element.foto} name={String(element.ano)} />
           })}
         </div>

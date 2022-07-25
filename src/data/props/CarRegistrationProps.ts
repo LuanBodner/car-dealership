@@ -1,3 +1,3 @@
 export interface CarRegistrationProps {
-  hasName?: boolean;
+  hasName?: boolean
 }
