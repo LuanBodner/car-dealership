@@ -2,16 +2,21 @@ import { Button } from '@mui/material'
 import { ImageLoaderProps } from 'data/props/ImageLoaderProps'
 import React, { useEffect, useRef, useState } from 'react'
 import placeholderImage from '../../../images/placeholder.png'
+import { validateImage } from '../FormFunctions'
 
 export function ImageLoader(props: ImageLoaderProps) {
   const fileAnchor: any = useRef()
   const [image, setImage] = useState()
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
   const [renderedImage, setRenderedImage] = useState<any>(props.image)
 
   useEffect(() => {
     if (image) {
-      const objectURL = URL.createObjectURL(image)
-      setRenderedImage(objectURL)
+      if (validateImage((image as any).type as string)) {
+        const objectURL = URL.createObjectURL(image)
+        setRenderedImage(objectURL)
+        setShowErrorMessage(false)
+      } else setShowErrorMessage(true)
     }
   }, [image])
 
@@ -35,6 +40,14 @@ export function ImageLoader(props: ImageLoaderProps) {
         <Button variant='outlined' onClick={openFileExplorer}>
           Carregar imagem
         </Button>
+        {showErrorMessage === true ? (
+          <>
+            <p style={{ color: 'red' }}>Arquivo inválido! </p>
+            <p style={{ color: 'red' }}>Formato deve ser do tipo .png!</p>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   )

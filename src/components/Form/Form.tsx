@@ -3,16 +3,18 @@ import { ImageLoader } from 'components/Form/components/ImageLoader'
 import CarDTO from 'data/dtos/CarDTO'
 import { FormProps } from 'data/props/FormProps'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import { FormTextField } from './components/FormTextField'
+import { validateColor, validateDailyFee, validateFinalDTO, validateModel, validatePlate, validateYear } from './FormFunctions'
 
 export function Form(props: FormProps) {
   const [id, setId] = useState<number>()
   const [brand, setBrand] = useState<number>(0)
   const [model, setModel] = useState<string>('')
-  const [year, setYear] = useState<number>()
+  const [year, setYear] = useState<number>(2022)
   const [plate, setPlate] = useState<string>('')
   const [color, setColor] = useState<string>('')
-  const [dailyFee, setDailyFee] = useState<number>(0.0)
+  const [dailyFee, setDailyFee] = useState<number>(50.0)
   const [image, setImage] = useState<string>()
 
   async function setValueToState() {
@@ -32,6 +34,14 @@ export function Form(props: FormProps) {
   useEffect(() => {
     if (props.setInitialValues !== undefined) setValueToState()
   }, [])
+
+  useEffect(() => {
+    setModel(validateModel(model))
+    setYear(validateYear(year))
+    setPlate(validatePlate(plate))
+    setColor(validateColor(color))
+    setDailyFee(validateDailyFee(dailyFee))
+  }, [model, year, plate, color, dailyFee])
 
   function createCarDTO(): CarDTO {
     const parsedImage = image.includes(process.env.REACT_APP_IMAGE_PATH) ? image : process.env.REACT_APP_IMAGE_PATH + '/' + image
@@ -71,10 +81,10 @@ export function Form(props: FormProps) {
             </Select>
           </div>
           <FormTextField label='Modelo' value={model} onChange={(value) => setModel(String(value))} />
-          <FormTextField label='Ano' value={year} onChange={(value) => setYear(Number(value))} />
+          <FormTextField label='Ano' value={year} onChange={(value) => setYear(isNaN(Number(value)) ? validateYear(value) : Number(value))} />
           <FormTextField label='Placa' value={plate} onChange={(value) => setPlate(String(value))} />
           <FormTextField label='Cor' value={color} onChange={(value) => setColor(String(value))} />
-          <FormTextField label='Valor da diária' value={dailyFee} onChange={(value) => setDailyFee(Number(value))} />
+          <FormTextField label='Valor da diária' value={dailyFee} onChange={(value) => setDailyFee(isNaN(Number(value)) ? validateDailyFee(value) : Number(value))} />
           <ImageLoader image={image} onChangeImage={(element: string) => setImage(element)} />
           <div
             style={{
@@ -85,7 +95,10 @@ export function Form(props: FormProps) {
           >
             <Button
               onClick={() => {
-                props.formHandle(createCarDTO())
+                const carDTO = createCarDTO()
+                const fields = validateFinalDTO(carDTO)
+                if (fields && fields.length) toast.error(`Campos com valores inválidos: ${fields.map((value) => value)}`)
+                else props.formHandle(carDTO)
               }}
               variant='contained'
             >
@@ -96,7 +109,8 @@ export function Form(props: FormProps) {
                 variant='outlined'
                 style={{ backgroundColor: 'red', color: 'white' }}
                 onClick={() => {
-                  props.onDelete(createCarDTO())
+                  const carDTO = createCarDTO()
+                  props.onDelete(carDTO)
                 }}
               >
                 Deletar
