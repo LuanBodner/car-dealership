@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { CarEdit } from 'views/carEdit/CarEdit'
 import { CarList } from 'views/CarList/CarList'
 import CarRegistration from 'views/CarRegistration/CarRegistration'
+import { ClientRegistration } from 'views/ClientRegistration/ClientRegistration'
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <Switch>
           <Route path='/create-car' component={CarRegistration} />
+          <Route path='/create-client' component={ClientRegistration} />
           <Route path='/edit-car/:id' component={CarEdit} />
           <Route path='/' component={CarList} />
           <Redirect to='/' />

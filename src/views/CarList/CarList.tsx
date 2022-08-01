@@ -2,13 +2,21 @@ import { Button } from '@mui/material'
 import CarDTO from 'data/dtos/CarDTO'
 import { NodeAPI } from 'data/services/Service'
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Item } from './components/Item/Item'
 
 export function CarList() {
   const [cars, setCars] = useState<Array<CarDTO>>()
-  function goToCreatePage() {
-    window.location.href = '/create-car'
+
+  const history = useHistory()
+
+  function goToCreateCarPage() {
+    history.push('/create-car')
+  }
+
+  function goToCreateClientPage() {
+    history.push('/create-client')
   }
 
   async function getListOfCars() {
@@ -28,7 +36,11 @@ export function CarList() {
     <div style={{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center' }}>
       <div>
         <div style={{ marginTop: '30px', marginBottom: '30px', display: 'flex', justifyContent: 'flex-end' }}>
-          <Button variant='contained' onClick={goToCreatePage}>
+          <Button variant='outlined' onClick={goToCreateClientPage} style={{ marginRight: '15px' }}>
+            Criar Cliente
+          </Button>
+
+          <Button variant='contained' onClick={goToCreateCarPage}>
             Criar Veículo
           </Button>
         </div>
