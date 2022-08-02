@@ -44,8 +44,7 @@ export function Form(props: FormProps) {
   }, [model, year, plate, color, dailyFee])
 
   function createCarDTO(): CarDTO {
-    const parsedImage = image.includes(process.env.REACT_APP_IMAGE_PATH) ? image : process.env.REACT_APP_IMAGE_PATH + '/' + image
-    return new CarDTO(brand, model, year, parsedImage, plate, color, dailyFee, id)
+    return new CarDTO(brand, model, year, image, plate, color, dailyFee, id)
   }
 
   return (

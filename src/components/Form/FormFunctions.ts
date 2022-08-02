@@ -46,7 +46,7 @@ export function validateColor(color: string) {
   let parsedColor = ''
 
   if (color && color.length) {
-    parsedColor = color.replace(/[^a-zA-Z]+/, '')
+    parsedColor = color.replace(/[^a-zA-Z ]+/, '')
     if (parsedColor.length > 50) parsedColor = parsedColor.substring(0, 50)
   }
 

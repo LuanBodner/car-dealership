@@ -24,7 +24,7 @@ export function CarEdit() {
     try {
       const id = carDTO.id
       delete carDTO.id
-      await NodeAPI.put(`${process.env.REACT_APP_BASE_URL}/veiculo/${id}`, carDTO)
+      await NodeAPI.put(`${process.env.REACT_APP_BASE_URL}/veiculo/${id}`, carDTO.convertToFormData())
       toast.success('Veículo atualizado com sucesso')
       history.push('/')
     } catch (error: any) {

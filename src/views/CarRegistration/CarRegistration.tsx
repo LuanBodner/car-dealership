@@ -11,7 +11,7 @@ function CarRegistration(props: CarRegistrationProps) {
 
   async function onSendForm(carDTO: CarDTO) {
     try {
-      await NodeAPI.post(`${process.env.REACT_APP_BASE_URL}/veiculo`, carDTO)
+      await NodeAPI.post(`${process.env.REACT_APP_BASE_URL}/veiculo`, carDTO.convertToFormData())
 
       toast.success('Novo veículo cadastrado com sucesso')
       history.push('/')

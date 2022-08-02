@@ -26,7 +26,7 @@ export function ImageLoader(props: ImageLoaderProps) {
 
   function onSelectFile(event: any) {
     setImage(event.target.files[0])
-    props.onChangeImage(event.target.files[0].name)
+    props.onChangeImage(event.target.files[0])
   }
 
   return (
